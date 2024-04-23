@@ -33,8 +33,23 @@ def login(email, password):
             user = users.readline()
     users.close()
 
+    charities = open(r"charities.txt")
+    charity = charities.readline()
+    while charity != "":
+        charity_info = charity.split(',')
+        if charity_info[0] == email:
+            if charity_info[1][:-1] == password:
+                return True
+            else:
+                return False
+        else:
+            charity = charities.readline()
+
+    charities.close()
+    return False
 
 def register(email, password, security, first, last, state):
+    
     # check if email is valid
     if not emailValid(email):
         return False

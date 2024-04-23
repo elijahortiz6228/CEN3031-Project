@@ -16,14 +16,27 @@
 
   <script type="text/babel">
     function Header() {
-      return (
-        <div className="header">
-          <h1>Charities Hub</h1>
-          <div className="signin">
-            <a href="signin.html">Sign In</a>
+      if (getToken()) {
+        return (
+          <div className="header">
+            <h1>Charities Hub</h1>
+            <div className="userProfile">
+              <img src={getPFP()} alt="Profile Picture" className="profilePic" />
+              <span className="Name"><a href="profile.html" style={{ color: 'white', fontWeight: 'bold' }}>{getName()}</a></span>
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
+      else {
+        return (
+          <div className="header">
+            <h1>Charities Hub</h1>
+            <div className="signin">
+              <a href="signin.html">Sign In</a>
+            </div>
+          </div>
+        );
+      }
     }
 
     function Navbar() {
@@ -44,6 +57,35 @@
       );
     }
 
+    // Function to retrieve the authentication token
+    function getToken() {
+      return localStorage.getItem('token');
+    }
+    function getName() {
+      return localStorage.getItem('name');
+    }
+    function getPFP() {
+        return localStorage.getItem('pfp');
+    }
+
+    // Function to include token in request headers
+    function fetchWithToken(url, options) {
+      const token = getToken();
+      if (token) {
+        // Create a new object for headers and merge them
+        options.headers = Object.assign({}, options.headers || {}, { Authorization: `Bearer ${token}` });
+      }
+      return fetch(url, options);
+    }
+
+    function handleSearch() {
+      const searchValue = document.getElementById('search').value;
+      if (searchValue.trim() !== '') {
+        localStorage.setItem('search', searchValue);
+        window.location.href = 'search_results.html'; // Redirect to search results page
+      }
+    }
+
     function SearchBar() {
       return (
         <div className="search-bar">
@@ -53,7 +95,7 @@
             name="search"
             placeholder="Search charities..."
           />
-          <button type="button">Search</button>
+          <button type="button" onClick={handleSearch}>Search</button>
         </div>
       );
     }
@@ -75,7 +117,7 @@
       return (
         <div className="footer">
           <footer>
-            <p>2024 Copyright. All rights reserved.</p>
+            <p>Created by Elijah Ortiz, Jillian Armstrong, and Megan Arbuckle</p>
           </footer>
         </div>
       );

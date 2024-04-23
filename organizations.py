@@ -25,23 +25,6 @@ def phoneValid(phoneNum):
     else:
         return True
 
-def charity_login(email, password):
-    charities = open(r"charities.txt")
-    charity = charities.readline()
-    while charity != "":
-        charity_info = charity.split(',')
-        if charity_info[0] == email:
-            if charity_info[1][:-1] == password:
-                return True
-            else:
-                return False
-        else:
-            charity = charities.readline()
-
-    charities.close()
-    return False
-
-
 def charity_register(name, email, password, phoneNumber, address, charityType, charityBio):
     name = name
     address = address
