@@ -32,16 +32,38 @@ def login(email, password):
         else:
             user = users.readline()
     users.close()
-
     charities = open(r"charities.txt")
     charity = charities.readline()
     while charity != "":
         charity_info = charity.split(',')
-        if charity_info[0] == email:
-            if charity_info[1][:-1] == password:
+        if charity_info[1] == email:
+            if charity_info[2] == password:
                 return True
             else:
                 return False
+        else:
+            charity = charities.readline()
+
+    charities.close()
+    return False
+
+def charity(email):
+    # check if user id and password are in users file
+    users = open(r"users.txt")
+    user = users.readline()
+    while user != "":
+        info = user.split('|')
+        if info[0] == email:
+            return False
+        else:
+            user = users.readline()
+    users.close()
+    charities = open(r"charities.txt")
+    charity = charities.readline()
+    while charity != "":
+        charity_info = charity.split(',')
+        if charity_info[1] == email:
+            return True
         else:
             charity = charities.readline()
 

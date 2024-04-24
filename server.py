@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin  # Import CORS
 
 from login import register as reg
 from login import login as log
+from login import charity
 import organizations as org
 import profiles
 
@@ -45,16 +46,16 @@ def register():
 @app.route('/registerOrg', methods=['POST'])
 def registerOrg():
     data = request.get_json()
-    password = data.get('password')
-    email = data.get('email')
     name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
     phone = data.get('phone')
     addr = data.get('addr')
     orgType = data.get('orgType')
     bio = data.get('bio')
     if org.charity_register(name,email,password,phone,addr,orgType,bio):
         # Create Profile
-        profiles.createOrgProfile(email, bio, 'profile-pic.png')
+        profiles.createProfile(email, bio, 'profile-pic.png')
         # User authenticated, return success response
         return jsonify({'message': 'Registration successful!', 'status': 200, 'token': email, 'name':name}), 200
     else:
@@ -69,7 +70,7 @@ def signin():
 
     if log(email,password):
         # User authenticated, return success response
-        return jsonify({'message': 'Signin successful!', 'status': 200, 'token': profiles.getName(email), 'pfp':profiles.getPFP(email)}), 200
+        return jsonify({'message': 'Signin successful!', 'status': 200, 'token': email, 'name': profiles.getName(email), 'charity':charity(email), 'pfp':profiles.getPFP(email)}), 200
     else:
         # Incorrect email or password
         return jsonify({'error': 'Incorrect email or password'}), 401

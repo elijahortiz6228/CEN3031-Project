@@ -50,6 +50,12 @@ body {
     margin-right: 20px;
 }
 
+.navbar b {
+    position: absolute;
+    right: 20px;
+    top: 70px;
+}
+
 .navbar a {
     color: #ffffff;
     text-decoration: none;

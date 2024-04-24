@@ -26,11 +26,6 @@ def phoneValid(phoneNum):
         return True
 
 def charity_register(name, email, password, phoneNumber, address, charityType, charityBio):
-    name = name
-    address = address
-    charityType = charityType
-    charityBio = charityBio
-
     if not emailValid(email):
         return False
 

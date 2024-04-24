@@ -52,9 +52,16 @@ body {
     display: flex;
 }
 
+.navbar b {
+    position: absolute;
+    right: 20px;
+    top: 70px;
+}
+
 .navbar li {
     margin-right: 20px;
 }
+
 
 .navbar a {
     color: #ffffff;

@@ -8,3 +8,4 @@ Harmony Helpers,harmonyhelpers@hotmail.com,Helpers2024!$,3214564444,876 Harmony 
 Brighter Horizons,brighterhorizons@yahoo.com,Horizons2024!$,7854662341,876 Brighter Drive,Foundation
 United Uplift,uniteduplift@gmail.com,Uplift2024!$,5056783232,210 United Lane,Association
 Serene Support,serenesupport@yahoo.com,Support2024!$,9996774356,123 Serene Street,Foundation
+Charity 1,charity@example.com,Passwords123!,3214567890,addr,Nonprofit,Bio
