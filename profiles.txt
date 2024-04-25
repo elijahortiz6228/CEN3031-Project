@@ -1,2 +1,4 @@
-john@example.com|Bio|profile-pic.png
-charity@example.com|Bio|profile-pic.png
+john@example.com|The name's Doe. JOHN DOE.|profile-pic.png
+gmail@gmail.com|3|profile-pic.png
+elijah@example.com|I am a computer science student.|profile-pic.png
+charity2@example.com|Example Charity Bio|profile-pic.png

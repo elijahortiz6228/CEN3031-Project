@@ -17,10 +17,12 @@
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" placeholder="Enter your email address" required />
                 </div>
+                <p id="taken-email" class="error-message" style="visibility: hidden;">Email is take. Please sign in</p>
                 <div class="input-group">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required />
                 </div>
+                <p id="invalid-password" class="error-message" style="visibility: hidden;">Invalid password. Password must be 12+ characters and use a lowercase, uppercase, and special character</p>
                 <div class="input-group">
                     <label for="firstname">First Name:</label>
                     <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required />
@@ -85,7 +87,12 @@
                         <option value="WY">Wyoming</option>
                     </select>
                 </div>
+                <div class="input-group">
+                    <label for="security">What was the name of your first pet?</label>
+                    <input type="text" id="security" name="security" placeholder="Enter your answer" required />
+                </div>
                 <button type="submit">Register</button>
+                <p>Already have an account? <a href="signin.html">Sign in</a>.</p>
             </form>
         </div>
     </div>
@@ -98,6 +105,7 @@
             var firstname = document.getElementById("firstname").value;
             var lastname = document.getElementById("lastname").value;
             var state = document.getElementById("state").value;
+            var security = document.getElementById("security").value;
 
             fetch('http://127.0.0.1:5001/register', {
                 method: 'POST',
@@ -109,13 +117,14 @@
                     email: email,
                     firstname: firstname,
                     lastname: lastname,
-                    state: state
+                    state: state,
+                    security: security
                 })
             })
                 .then(response => {
                     //console.log(response.json());
                     if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                        //throw new Error('Network response was not ok');
                     }
                     return response.json();
                 })
@@ -128,7 +137,16 @@
                         localStorage.setItem('pfp', 'profile-pic.png');
                         // Redirect the user to another page
                         window.location.href = 'index.html';
-                    } else {
+                    }
+                    else if (data && data.error === 'Invalid password') {
+                        document.getElementById("invalid-password").style.visibility = 'visible';
+                        document.getElementById("taken-email").style.visibility = 'hidden';
+                    }
+                    else if (data && data.error === 'Email is taken') {
+                        document.getElementById("invalid-password").style.visibility = 'hidden';
+                        document.getElementById("taken-email").style.visibility = 'visible';
+                    }
+                    else {
                         // Handle other response data as needed
                         console.log(data); // Log the response data to the console
                     }
