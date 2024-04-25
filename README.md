@@ -3,6 +3,14 @@ Group Project for Intro to Software Engineering.
 
 Goal: Creating a website for accessing many different charities/non-profit foundations.
 
+Libraries:
+pip install
+flask
+flask_cors
+re
+nltk
+nltk.corpus
+
 Running the website:
 in command prompt/ terminal(bash):
 cd [location of files]
